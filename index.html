@@ -64,7 +64,6 @@
 
     <div class="container mx-auto p-4 md:p-8 lg:p-12">
         
-        <!-- Header -->
         <header class="text-center mb-12">
             <h1 class="text-5xl md:text-6xl font-extrabold text-white tracking-tight" style="text-shadow: 2px 2px 8px rgba(0,0,0,0.4);">NetworkService</h1>
             <p class="mt-4 text-lg md:text-xl text-gray-200 max-w-3xl mx-auto" style="text-shadow: 1px 1px 4px rgba(0,0,0,0.5);">A unified networking module for simplified client-server communication in Roblox.</p>
@@ -72,7 +71,6 @@
 
         <main class="grid grid-cols-1 lg:grid-cols-12 gap-8">
 
-            <!-- Navigation -->
             <aside class="lg:col-span-3 lg:sticky top-8 self-start">
                 <div class="glass-panel p-6">
                     <h3 class="font-bold text-lg mb-4 text-gray-900">Navigation</h3>
@@ -93,10 +91,8 @@
                 </div>
             </aside>
 
-            <!-- Content -->
             <div class="lg:col-span-9 space-y-8">
 
-                <!-- Overview -->
                 <section id="overview" class="glass-panel p-8">
                     <h2 class="text-3xl font-bold text-gray-900 mb-4">Overview</h2>
                     <p class="text-gray-800 leading-relaxed">
@@ -104,7 +100,6 @@
                     </p>
                 </section>
 
-                <!-- Setup -->
                 <section id="setup" class="glass-panel p-8">
                     <h2 class="text-3xl font-bold text-gray-900 mb-4">Setup</h2>
                     <p class="text-gray-800 leading-relaxed mb-4">
@@ -119,12 +114,10 @@
                     </p>
                 </section>
 
-                <!-- API Reference -->
                 <section id="api">
                     <h2 class="text-4xl font-extrabold text-white mb-6" style="text-shadow: 2px 2px 8px rgba(0,0,0,0.4);">API Reference</h2>
                     <div class="space-y-8">
                         
-                        <!-- Init -->
                         <div id="init" class="glass-panel p-8">
                             <h3 class="text-2xl font-bold text-gray-900 mb-2">NetworkService:Init()</h3>
                             <p class="text-gray-600 mb-4"><span class="font-semibold text-purple-700">Context:</span> Both Server & Client</p>
@@ -147,7 +140,6 @@
                             </div>
                         </div>
 
-                        <!-- SetConnection -->
                         <div id="setconnection" class="glass-panel p-8">
                             <h3 class="text-2xl font-bold text-gray-900 mb-2">NetworkService:SetConnection(name, type, callback)</h3>
                             <p class="text-gray-600 mb-4"><span class="font-semibold text-purple-700">Context:</span> Both Server & Client</p>
@@ -160,32 +152,30 @@
                             </div>
                         </div>
 
-                        <!-- FireServerConnection -->
                         <div id="fireserver" class="glass-panel p-8">
-                            <h3 class="text-2xl font-bold text-gray-900 mb-2">NetworkService.FireServerConnection(eventName, eventType, ...)</h3>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-2">NetworkService:FireServerConnection(eventName, eventType, ...)</h3>
                             <p class="text-gray-600 mb-4"><span class="font-semibold text-purple-700">Context:</span> Client Only</p>
                             <p class="text-gray-800 leading-relaxed mb-4">Fires an event from a client to the server. Can be used for `REMOTE_EVENT`, `UNRELIABLE_REMOTE_EVENT`, or `REMOTE_FUNCTION`.</p>
                              <div class="code-container">
                                 <h4 class="font-semibold text-gray-800 mb-2 mt-4">Example: Client sending data to the server</h4>
                                 <pre class="code-block rounded-lg p-4 text-sm relative"><button class="copy-btn">Copy</button><code><span class="token comment">-- This will trigger the "PlayerJoined" listener on the server</span>
-<span class="token namespace">NetworkService</span>.FireServerConnection(<span class="token string">"PlayerJoined"</span>, <span class="token string">"REMOTE_EVENT"</span>, <span class="token string">"Hello from the client!"</span>)
+<span class="token namespace">NetworkService</span>:FireServerConnection(<span class="token string">"PlayerJoined"</span>, <span class="token string">"REMOTE_EVENT"</span>, <span class="token string">"Hello from the client!"</span>)
 
 <span class="token comment">-- Example with a RemoteFunction to get data from the server</span>
-<span class="token keyword">local</span> serverTime <span class="token operator">=</span> <span class="token namespace">NetworkService</span>.FireServerConnection(<span class="token string">"GetServerTime"</span>, <span class="token string">"REMOTE_FUNCTION"</span>)
+<span class="token keyword">local</span> serverTime <span class="token operator">=</span> <span class="token namespace">NetworkService</span>:FireServerConnection(<span class="token string">"GetServerTime"</span>, <span class="token string">"REMOTE_FUNCTION"</span>)
 <span class="token keyword">print</span>(<span class="token string">"Current server time is: "</span> .. serverTime)</code></pre>
                             </div>
                         </div>
 
-                        <!-- FireClientConnection -->
                         <div id="fireclient" class="glass-panel p-8">
-                            <h3 class="text-2xl font-bold text-gray-900 mb-2">NetworkService.FireClientConnection(player, eventName, eventType, ...)</h3>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-2">NetworkService:FireClientConnection(player, eventName, eventType, ...)</h3>
                             <p class="text-gray-600 mb-4"><span class="font-semibold text-purple-700">Context:</span> Server Only</p>
                             <p class="text-gray-800 leading-relaxed mb-4">Fires an event from the server to a specific client.</p>
                             <div class="code-container">
                                 <h4 class="font-semibold text-gray-800 mb-2 mt-4">Example: Server sending a private message to a client</h4>
                                 <pre class="code-block rounded-lg p-4 text-sm relative"><button class="copy-btn">Copy</button><code><span class="token comment">-- On the server</span>
 <span class="token keyword">game</span>.Players.PlayerAdded:Connect(<span class="token keyword">function</span>(player)
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="token namespace">NetworkService</span>.FireClientConnection(player, <span class="token string">"WelcomeMessage"</span>, <span class="token string">"REMOTE_EVENT"</span>, <span class="token string">"Welcome to the game!"</span>)
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="token namespace">NetworkService</span>:FireClientConnection(player, <span class="token string">"WelcomeMessage"</span>, <span class="token string">"REMOTE_EVENT"</span>, <span class="token string">"Welcome to the game!"</span>)
 <span class="token keyword">end</span>)
 
 <span class="token comment">-- On the client, you would have a listener for "WelcomeMessage"</span>
@@ -195,22 +185,20 @@
                             </div>
                         </div>
                         
-                        <!-- FireAllClientConnection -->
                         <div id="fireallclients" class="glass-panel p-8">
-                            <h3 class="text-2xl font-bold text-gray-900 mb-2">NetworkService.FireAllClientConnection(eventName, eventType, ...)</h3>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-2">NetworkService:FireAllClientConnection(eventName, eventType, ...)</h3>
                             <p class="text-gray-600 mb-4"><span class="font-semibold text-purple-700">Context:</span> Server Only</p>
                             <p class="text-gray-800 leading-relaxed mb-4">Fires an event from the server to all connected clients. Cannot be used for `REMOTE_FUNCTION`.</p>
                             <div class="code-container">
                                 <h4 class="font-semibold text-gray-800 mb-2 mt-4">Example: Server sending a global announcement</h4>
                                 <pre class="code-block rounded-lg p-4 text-sm relative"><button class="copy-btn">Copy</button><code><span class="token comment">-- On the server, after 10 seconds, send an announcement</span>
 <span class="token keyword">task</span>.wait(<span class="token number">10</span>)
-<span class="token namespace">NetworkService</span>.FireAllClientConnection(<span class="token string">"GlobalAnnouncement"</span>, <span class="token string">"REMOTE_EVENT"</span>, <span class="token string">"Server shutting down in 1 minute!"</span>)</code></pre>
+<span class="token namespace">NetworkService</span>:FireAllClientConnection(<span class="token string">"GlobalAnnouncement"</span>, <span class="token string">"REMOTE_EVENT"</span>, <span class="token string">"Server shutting down in 1 minute!"</span>)</code></pre>
                             </div>
                         </div>
 
-                        <!-- FireConnection -->
                         <div id="fireconnection" class="glass-panel p-8">
-                            <h3 class="text-2xl font-bold text-gray-900 mb-2">NetworkService.FireConnection(eventName, ...)</h3>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-2">NetworkService:FireConnection(eventName, ...)</h3>
                             <p class="text-gray-600 mb-4"><span class="font-semibold text-purple-700">Context:</span> Both Server & Client</p>
                             <p class="text-gray-800 leading-relaxed mb-4">Fires a `BINDABLE_EVENT`. This is for communication within the same context (e.g., script-to-script on the server, or LocalScript-to-LocalScript on the client). It does not cross the client-server boundary.</p>
                             <div class="code-container">
@@ -223,14 +211,13 @@
 <span class="token comment">-- LocalScript 2 (e.g., character script)</span>
 <span class="token keyword">local</span> humanoid <span class="token operator">=</span> character:WaitForChild(<span class="token string">"Humanoid"</span>)
 humanoid.HealthChanged:Connect(<span class="token keyword">function</span>(health)
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="token namespace">NetworkService</span>.FireConnection(<span class="token string">"UpdateHealthUI"</span>, health)
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="token namespace">NetworkService</span>:FireConnection(<span class="token string">"UpdateHealthUI"</span>, health)
 <span class="token keyword">end</span>)</code></pre>
                             </div>
                         </div>
                     </div>
                 </section>
                 
-                <!-- Full Example -->
                 <section id="example" class="glass-panel p-8">
                     <h2 class="text-3xl font-bold text-gray-900 mb-4">Full Example: Click a Part to Change Its Color for Everyone</h2>
                     <p class="text-gray-800 leading-relaxed mb-4">This example demonstrates a common use case: a client action (clicking a part) causing a server-validated change that is then replicated to all clients.</p>
@@ -246,97 +233,12 @@ humanoid.HealthChanged:Connect(<span class="token keyword">function</span>(healt
 <span class="token namespace">NetworkService</span>:Init()
 
 <span class="token comment">-- Listen for a client's request to change the color</span>
-<span class="token namespace">NetworkService</span>:SetConnection(<span class="token string">"RequestColorChange"</span>, <span class="token string">"REMOTE_EVENT"</span>, <span class="token keyword">function</span>(player)
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="token comment">-- Optional: Add server-side validation here (e.g., cooldowns)</span>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">print</span>(player.Name .. <span class="token string">" requested a color change."</span>)
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="token comment">-- Generate a new random color</span>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">local</span> newColor <span class="token operator">=</span> Color3.new(<span class="token keyword">math</span>.random(), <span class="token keyword">math</span>.random(), <span class="token keyword">math</span>.random())
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="token comment">-- Tell all clients to execute the color change</span>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="token namespace">NetworkService</span>.FireAllClientConnection(<span class="token string">"ExecuteColorChange"</span>, <span class="token string">"REMOTE_EVENT"</span>, newColor)
-<span class="token keyword">end</span>)</code></pre>
-                    </div>
-
-                    <div class="code-container">
-                        <h4 class="font-semibold text-gray-800 mb-2 mt-4">2. Local Script (`StarterPlayerScripts/ClickDetector.client.lua`)</h4>
-                        <pre class="code-block rounded-lg p-4 text-sm relative"><button class="copy-btn">Copy</button><code><span class="token keyword">local</span> ReplicatedStorage <span class="token operator">=</span> <span class="token keyword">game</span>:GetService(<span class="token string">"ReplicatedStorage"</span>)
-<span class="token keyword">local</span> NetworkService <span class="token operator">=</span> <span class="token keyword">require</span>(ReplicatedStorage.NetworkService)
-
-<span class="token keyword">local</span> partToChange <span class="token operator">=</span> <span class="token keyword">workspace</span>:WaitForChild(<span class="token string">"ColorPart"</span>)
-<span class="token keyword">local</span> clickDetector <span class="token operator">=</span> partToChange:WaitForChild(<span class="token string">"ClickDetector"</span>)
-
-<span class="token comment">-- Initialize the service</span>
-<span class="token namespace">NetworkService</span>:Init()
-
-<span class="token comment">-- Listen for the server's command to change the color</span>
-<span class="token namespace">NetworkService</span>:SetConnection(<span class="token string">"ExecuteColorChange"</span>, <span class="token string">"REMOTE_EVENT"</span>, <span class="token keyword">function</span>(newColor)
-&nbsp;&nbsp;&nbsp;&nbsp;partToChange.Color <span class="token operator">=</span> newColor
-<span class="token keyword">end</span>)
-
-<span class="token comment">-- When the player clicks the part, send a request to the server</span>
-clickDetector.MouseClick:Connect(<span class="token keyword">function</span>()
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">print</span>(<span class="token string">"Sending color change request to server..."</span>)
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="token namespace">NetworkService</span>.FireServerConnection(<span class="token string">"RequestColorChange"</span>, <span class="token string">"REMOTE_EVENT"</span>)
-<span class="token keyword">end</span>)</code></pre>
-                    </div>
-                </section>
-            </div>
-        </main>
-
-        <footer class="text-center mt-16 text-gray-200/80" style="text-shadow: 1px 1px 4px rgba(0,0,0,0.5);">
-            <p>Documentation generated for NetworkService.</p>
-        </footer>
-    </div>
-
-    <script>
-        // Copy to clipboard functionality
-        document.querySelectorAll('.copy-btn').forEach(button => {
-            button.addEventListener('click', (e) => {
-                const codeBlock = e.target.nextElementSibling;
-                const code = codeBlock.innerText;
-
-                // Create a temporary textarea element to copy the text
-                const textarea = document.createElement('textarea');
-                textarea.value = code;
-                document.body.appendChild(textarea);
-                textarea.select();
-                try {
-                    document.execCommand('copy');
-                    e.target.textContent = 'Copied!';
-                } catch (err) {
-                    e.target.textContent = 'Error';
-                    console.error('Failed to copy text: ', err);
-                }
-                document.body.removeChild(textarea);
-
-                setTimeout(() => {
-                    e.target.textContent = 'Copy';
-                }, 2000);
-            });
-        });
-        
-        // Style for the copy button
-        const style = document.createElement('style');
-        style.textContent = `
-            .copy-btn {
-                position: absolute;
-                top: 1rem;
-                right: 1rem;
-                background-color: rgba(255, 255, 255, 0.1);
-                color: white;
-                border: 1px solid rgba(255, 255, 255, 0.2);
-                padding: 0.25rem 0.75rem;
-                border-radius: 0.5rem;
-                font-size: 0.8rem;
-                cursor: pointer;
-                transition: background-color 0.2s;
-            }
-            .copy-btn:hover {
-                background-color: rgba(255, 255, 255, 0.2);
-            }
-        `;
-        document.head.appendChild(style);
-    </script>
-</body>
+<span class="token namespace">NetworkService</span>:SetConnection(<span class="token string">"RequestColorChange"</span>, <span class="token string">"REMOTE_EVENT"</span>, <span class="token key">function</span>(player, newColor)</code></pre>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </main>
+        </div>
+    </body>
 </html>
